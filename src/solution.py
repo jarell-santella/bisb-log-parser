@@ -81,16 +81,19 @@ def solution():
 
     active_connections = 0
 
+    # Iterate through and produce output
     with open("src/output.txt", "a", encoding="UTF-8") as output_file:
         for i, total_bytes in enumerate(bytes_transferred):
             active_connections += connections_started[i] - connections_ended[i]
             output_file.write(f"{i + 1}: {active_connections}, {total_bytes}\n")
 
 def main():
+    # Delete output file if exists so output is produced from scratch and nothing is
+    # appeneded
     if os.path.exists("src/output.txt"):
         os.remove("src/output.txt")
 
-    with open("src/output.txt", "x", encoding="UTF-8") as output_file:
+    with open("src/output.txt", "x", encoding="UTF-8") as _:
         pass
 
     start = perf_counter_ns()
