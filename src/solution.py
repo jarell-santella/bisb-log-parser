@@ -81,14 +81,17 @@ def solution():
 
     active_connections = 0
 
-    with open("src/outout.txt", "a") as output_file:
+    with open("src/output.txt", "a", encoding="UTF-8") as output_file:
         for i, total_bytes in enumerate(bytes_transferred):
             active_connections += connections_started[i] - connections_ended[i]
             output_file.write(f"{i + 1}: {active_connections}, {total_bytes}\n")
 
 def main():
-    if os.path.exists("output.txt"):
-        os.remove("output.txt")
+    if os.path.exists("src/output.txt"):
+        os.remove("src/output.txt")
+
+    with open("src/output.txt", "x", encoding="UTF-8") as output_file:
+        pass
 
     start = perf_counter_ns()
     solution()
