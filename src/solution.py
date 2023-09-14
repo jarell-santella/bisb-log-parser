@@ -76,7 +76,7 @@ def solution():
                 connections_started[curr_second] += 1
                 prev_pin = curr_pin
 
-            connections_ended[prev_second + 120] += 1
+            connections_ended[curr_second + 120] += 1
             prev_second = curr_second
 
     active_connections = 0
