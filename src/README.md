@@ -24,6 +24,7 @@ Writing the report to the file is pretty straightforward now. We can iterate thr
 ## Algorithm complexity analysis
 
 Time: O(n)
+
 Space: O(1)
 
 By iterating through all of the requests in the file, the runtime is dependent on how many lines there are in the file. Therefore, it runs in linear time.
