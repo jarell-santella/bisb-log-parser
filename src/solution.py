@@ -1,7 +1,8 @@
 """A solution that attempts to solve the problem in O(n) time and O(n) space"""
 
+# from array import array
 from collections import defaultdict
-from datetime import datetime
+# from datetime import datetime
 # import heapq
 import os
 from time import perf_counter_ns
@@ -29,8 +30,8 @@ from time import perf_counter_ns
 #     def pop(self) -> Tuple[int, int]:
 #         key = heapq.heappop(self.__heap)
 #         return key, self.__dictionary.pop(key)
-    
-    
+
+
 #     def contains(self, key) -> bool:
 #         return key in self.__dictionary
 
@@ -51,15 +52,17 @@ def solution():
             if line[24] == ",":
                 continue
 
-            if prev_pin is None:
-                hour = datetime.strptime(line[:8], "%H:%M:%S").hour
+            # if prev_pin is None:
+            #     hour = datetime.strptime(line[:8], "%H:%M:%S").hour
+            #
+            # curr_second = int(
+            #     (
+            #         datetime.strptime(line[:8], "%H:%M:%S")
+            #         - datetime(1900, 1, 1, hour)
+            #     ).total_seconds()
+            # )
 
-            curr_second = int(
-                (
-                    datetime.strptime(line[:8], "%H:%M:%S")
-                    - datetime(1900, 1, 1, hour)
-                ).total_seconds()
-            )
+            curr_second = int(line[3:5]) * 60 + int(line[6:8])
 
             b_transferred = int(line[33:].split(",")[0])
             bytes_transferred[curr_second] += b_transferred if b_transferred > 0 else 0
@@ -87,13 +90,17 @@ def solution():
             active_connections += connections_started[i] - connections_ended[i]
             output_file.write(f"{i + 1}: {active_connections}, {total_bytes}\n")
 
+
 def main():
     # Delete output file if exists so output is produced from scratch and nothing is
-    # appeneded
+    # appended
     if os.path.exists("src/output.txt"):
         os.remove("src/output.txt")
-
-    with open("src/output.txt", "x", encoding="UTF-8") as _:
+    
+    # Create the file. This is because I noticed that if the file does not exist,
+    # the I/O would take an unusual amount of time to create it. This is a micro-
+    # optimization to prevent that
+    with open("src/output.txt", "x", encoding="UTF-8"):
         pass
 
     start = perf_counter_ns()
